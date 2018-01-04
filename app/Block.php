@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    use Blockchain;
+    use BlockchainHelper;
 
     protected $fillable = ['id', 'timestamp'];
 
@@ -20,9 +20,10 @@ class Block extends Model
 
         $block->proof = self::proofOfWork($lastBlock->proof);
         $block->previous_hash = self::getHash($lastBlock);
-        
         $block->transaction()->save($transaction);
         $block->save();
+
+        return $block;
     }
 
     public function transactions() {

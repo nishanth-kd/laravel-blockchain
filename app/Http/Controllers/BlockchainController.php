@@ -31,6 +31,6 @@ class BlockchainController extends Controller
     }
 
     public function chain(Request $request) {
-        return new Chain(Block::_create($request));
+        return new Blocks(Block::all());
     }
 }

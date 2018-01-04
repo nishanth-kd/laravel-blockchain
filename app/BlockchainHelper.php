@@ -2,7 +2,7 @@
 
 namespace App;
 
-trait Blockchain
+trait BlockchainHelper
 {
     
     public static function proofOfWork(String $lastProof) {
@@ -10,7 +10,6 @@ trait Blockchain
         while (false == self::validProof($lastProof, $proof)) {
             $proof++;
         }
-
         return $proof;
     }
 
