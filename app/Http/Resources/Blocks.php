@@ -12,14 +12,13 @@ class Blocks extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
-    {
+    public function toArray($request) {
         return [
-            'message': "New Block Forged",
-            'index': $this->index,
-            'transactions': Transactions::collection($this->transactions),
-            'proof': $this->proof,
-            'previous_hash': $this->previous_hash,
+            'message' => "New Block Forged",
+            'index' => $this->index,
+            'transactions' => new Transactions(Transactions::collection($this->transactions)),
+            'proof' => $this->proof,
+            'previous_hash' => $this->previous_hash,
         ];
     }
 }

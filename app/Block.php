@@ -25,13 +25,12 @@ class Block extends Model
         $block->save();
     }
 
-    public function transactions()
-    {
+    public function transactions() {
         return $this->hasMany('App\Transaction');
     }
     
     public static function getLastBlock() {
-        return User::orderBy('created_at', 'desc')->first();
+        return Block::orderBy('id', 'desc')->first();
     }
     
 }

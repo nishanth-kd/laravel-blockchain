@@ -12,8 +12,11 @@ class Transactions extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
-    {
-        return parent::toArray($request);
+    public function toArray($request) {
+        return [
+            'sender_id' => $this->sender_id,
+            'recipient_id' => $this->recipient_id,
+            'amount' => $this->amount,
+        ];
     }
 }
