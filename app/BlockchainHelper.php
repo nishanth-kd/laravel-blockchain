@@ -18,7 +18,7 @@ trait BlockchainHelper
     }
 
     public static function getHash(Block $block) {
-        
+        return hash('sha256', $block->toJson());
     }
 
 }

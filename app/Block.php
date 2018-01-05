@@ -12,12 +12,10 @@ class Block extends Model
 
     public static function _create(Transaction $transaction) {
         $lastBlock = Block::getLastBlock();
-
         $block = Block::create([
             'id' => $lastBlock->id + 1,
             'timestamp' => time(),
         ]);
-
         $block->proof = self::proofOfWork($lastBlock->proof);
         $block->previous_hash = self::getHash($lastBlock);
         $block->transaction()->save($transaction);
