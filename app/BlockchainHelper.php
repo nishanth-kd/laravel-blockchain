@@ -21,4 +21,21 @@ trait BlockchainHelper
         return hash('sha256', $block->toJson());
     }
 
+    public static function validChain(Block $blocks) {
+        $previousBlock = false;
+        foreach($blocks as $block) {
+            if($previousBlock) {
+                if($block->previous_hash != self::getHash($previousBlock)) {
+                    return false;
+                } 
+                if(false == self::validProof($previousBlock->proof, $block->proof)) {
+                    return false;
+                }
+            } else {
+                $previousBlock = $block;
+            }
+        }
+        return true;
+    }
+
 }

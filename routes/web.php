@@ -18,3 +18,11 @@ Route::get('/', function () {
 Route::get('/mine', 'BlockchainController@mine');
 Route::post('/transact', 'BlockchainController@transact');
 Route::get('/chain', 'BlockchainController@chain');
+
+
+Route::get('/node', 'BlockchainController@chain');
+
+Route::prefix('nodes')->group(function () {
+    Route::get('register', 'NodeController@register');
+    Route::get('resolve', 'NodeController@register');
+});
