@@ -13,10 +13,16 @@ class Transaction extends Model
         $transaction = Transaction::create($attr);
         $transaction->sender(User::find($attr['sender_id']));
         $transaction->recipient(User::find($attr['recipient_id']));
-        return $transaction;
+        if($transaction->isValid()) {
+            return $transaction;
+        } else {
+            return;
+        }
+        
     }
 
     public function sender(User $sender) {
+        
         if($sender) {
            $this->sender_id = $sender->id;
            return true;
@@ -32,4 +38,11 @@ class Transaction extends Model
         return false;
     }
 
+    public function senderHasBalance() {
+        return true;
+    }
+
+    public function isValid() {
+        return $this->senderHasBalance();
+    }
 }
